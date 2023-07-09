@@ -1,16 +1,18 @@
 # tasks_flutter_project
 
-A new Flutter project.
+A Task management made by Flutter
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Has  all the basic level functions, can add and modify Tasks.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## ScreenShorts
+
+![Alt ScreenShot](Screenshot_2023-07-09-08-44-29-550_com.miui.home.jpg)
+![Alt ScreenShot](Screenshot_2023-07-09-09-07-02-744_com.example.tasks_flutter_project.jpg)
+![Alt ScreenShot](Screenshot_2023-07-09-09-07-22-771_com.example.tasks_flutter_project.jpg)

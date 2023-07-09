@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'theme.dart';
 import 'package:flutter/services.dart';
 import 'homepage.dart';
+import 'launchScreen.dart';
 void main() {
   runApp( ChangeNotifierProvider<ThemeProvider>(
       create: (_) => ThemeProvider(),
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:HomePage()
+      home:LaunchScreen()
     );
   }
 }

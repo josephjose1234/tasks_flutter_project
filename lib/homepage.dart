@@ -90,141 +90,167 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           children: [
             ///AppBar
-            Container(
-              margin: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(
-                    Icons.menu,
-                    size: 40,
-                    color: Colors.blue,
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    // margin: EdgeInsets.all(),
-                    child: Text(
-                      'Tasks',
-                      style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          color: themeProvider.isDarkMode
-                              ? Colors.white
-                              : Colors.black),
-                    ),
-                  ),
-                  // Icon(Icons.search,
-                  // size: 30,color:Colors.blue,
-                  // ),
-                  Text('Search',
-                      style: TextStyle(
-                          color: Colors.blue, fontWeight: FontWeight.bold))
-                ],
-              ),
-            ),
+            AppBar(themeProvider: themeProvider),
 
             ///ListOfTasks
-            Expanded(
-              child: ListView.builder(
-                itemCount: TaskList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: themeProvider.isDarkMode
-                          ? Color.fromRGBO(27, 27, 31, 1)
-                          : Color.fromRGBO(230, 230, 238, 1),
-                      borderRadius: BorderRadius.circular(40),
-                      border: Border.all(width: 1),
-                    ),
-                    child: ListTile(
-                      leading: GestureDetector(
-                        onTap: () {
-                          setStatus(index);
-                        },
-                        child: Icon(
-                          Status[index] == '1'
-                              ? Icons.check_box
-                              : Icons.check_box_outline_blank,
-                          size: 40,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      title: Text(
-                        TaskList[index],
-                        style: TextStyle(
-                            color: themeProvider.isDarkMode
-                                ? Colors.white
-                                : Colors.black),
-                      ),
-                      trailing: GestureDetector(
-                        onTap: () {
-                          DeleteTask(index);
-                        },
-                        child: Icon(
-                          Icons.delete,
-                          size: 40,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            ListTasks(themeProvider),
 
             ///AddButton
-            Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                border: Border.all(width: 1),
-                borderRadius: BorderRadius.circular(40),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      child: TextField(
-                        controller: _newTask,
-                        style: TextStyle(
-                            color: themeProvider.isDarkMode
-                                ? Colors.white
-                                : Colors.black),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(
-                              color: themeProvider.isDarkMode
-                                  ? Colors.white
-                                  : Colors.black),
-                          hintText: 'Add Something...',
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      saveTask();
-                    },
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(40),
-                        ),
-                        color: Colors.blue,
-                      ),
-                      child: Icon(Icons.add, size: 40),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            AddSection(themeProvider),
           ],
         ),
       ),
     );
   }
+///List Tasks
+  Expanded ListTasks(ThemeProvider themeProvider) {
+    return Expanded(
+            child: ListView.builder(
+              itemCount: TaskList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: themeProvider.isDarkMode
+                        ? Color.fromRGBO(27, 27, 31, 1)
+                        : Color.fromRGBO(230, 230, 238, 1),
+                    borderRadius: BorderRadius.circular(40),
+                    border: Border.all(width: 1),
+                  ),
+                  child: ListTile(
+                    leading: GestureDetector(
+                      onTap: () {
+                        setStatus(index);
+                      },
+                      child: Icon(
+                        Status[index] == '1'
+                            ? Icons.check_box
+                            : Icons.check_box_outline_blank,
+                        size: 40,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    title: Text(
+                      TaskList[index],
+                      style: TextStyle(
+                          color: themeProvider.isDarkMode
+                              ? Colors.white
+                              : Colors.black),
+                    ),
+                    trailing: GestureDetector(
+                      onTap: () {
+                        DeleteTask(index);
+                      },
+                      child: Icon(
+                        Icons.delete,
+                        size: 40,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+  }
+//AddSection
+  Container AddSection(ThemeProvider themeProvider) {
+    return Container(
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+               color: themeProvider.isDarkMode
+                        ? Color.fromRGBO(27, 27, 31, 1)
+                        : Color.fromRGBO(230, 230, 238, 1),
+              border: Border.all(width: 1),
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: TextField(
+                      controller: _newTask,
+                      style: TextStyle(
+                          color: themeProvider.isDarkMode
+                              ? Colors.white
+                              : Colors.black),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                            color: themeProvider.isDarkMode
+                                ? Colors.white
+                                : Colors.black),
+                        hintText: 'Add Something...',
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    saveTask();
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(40),
+                      ),
+                      color: Colors.blue,
+                    ),
+                    child: Icon(Icons.add, size: 40),
+                  ),
+                ),
+              ],
+            ),
+          );
+  }
 }
+///AppBar
+class AppBar extends StatelessWidget {
+  const AppBar({
+    super.key,
+    required this.themeProvider,
+  });
+
+  final ThemeProvider themeProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(
+            Icons.menu,
+            size: 40,
+            color: Colors.blue,
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            // margin: EdgeInsets.all(),
+            child: Text(
+              'Tasks',
+              style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: themeProvider.isDarkMode
+                      ? Colors.white
+                      : Colors.black),
+            ),
+          ),
+          Icon(Icons.search,
+          size: 40,color:Colors.blue,
+          ),
+          // Text('Search',
+          //     style: TextStyle(
+          //         color: Colors.blue, fontWeight: FontWeight.bold))
+        ],
+      ),
+    );
+  }
+}
+
