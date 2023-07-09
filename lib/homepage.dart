@@ -47,16 +47,17 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void DeleteTask(int index)async {
+  void DeleteTask(int index) async {
     ///Fns:to delete Task;
-        SharedPreferences task = await SharedPreferences.getInstance();
-        setState(() {
-          TaskList.removeAt(index);
-          Status.removeAt(index);
-          task.setStringList('TASK', TaskList);
-          task.setStringList('STATUS', Status);
-        });
+    SharedPreferences task = await SharedPreferences.getInstance();
+    setState(() {
+      TaskList.removeAt(index);
+      Status.removeAt(index);
+      task.setStringList('TASK', TaskList);
+      task.setStringList('STATUS', Status);
+    });
   }
+
   void setStatus(int index) async {
     //Fns:to Mark Tasks as done;
     SharedPreferences task = await SharedPreferences.getInstance();
@@ -64,9 +65,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       if (index >= 0 && index < Status.length && Status[index] == '0') {
         Status[index] = '1';
-      }
-      else {
-        Status[index]='0';
+      } else {
+        Status[index] = '0';
       }
       task.setStringList('STATUS', Status);
       LoadTasks();
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
     );
     return SafeArea(
       child: Scaffold(
-        backgroundColor: themeProvider.isDarkMode?Colors.black:Colors.white,
+        backgroundColor: themeProvider.isDarkMode ? Colors.black : Colors.white,
         body: Column(
           children: [
             ///AppBar
@@ -95,23 +95,30 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Icon(
+                    Icons.menu,
+                    size: 40,
+                    color: Colors.blue,
+                  ),
                   Container(
                     alignment: Alignment.centerLeft,
-                   // margin: EdgeInsets.all(),
+                    // margin: EdgeInsets.all(),
                     child: Text(
                       'Tasks',
-                      style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          color: themeProvider.isDarkMode
+                              ? Colors.white
+                              : Colors.black),
                     ),
                   ),
                   // Icon(Icons.search,
                   // size: 30,color:Colors.blue,
                   // ),
                   Text('Search',
-                  style:TextStyle(
-                    color:Colors.blue,
-                    fontWeight: FontWeight.bold
-                  )
-                  )
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.bold))
                 ],
               ),
             ),
@@ -122,33 +129,47 @@ class _HomePageState extends State<HomePage> {
                 itemCount: TaskList.length,
                 itemBuilder: (context, index) {
                   return Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: themeProvider.isDarkMode?Colors.black:Color.fromRGBO(230, 230, 238,1),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 1),
-                      ),
-                      child: ListTile(
-                        leading: GestureDetector(
-                          onTap: () {
-                            setStatus(index);
-                          },
-                          child: Icon(
-                            Status[index] == '1'
-                                ? Icons.check_box
-                                : Icons.check_box_outline_blank,
-                            size: 40,
-                            color: Colors.blue,
-                          ),
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: themeProvider.isDarkMode
+                          ? Color.fromRGBO(27, 27, 31, 1)
+                          : Color.fromRGBO(230, 230, 238, 1),
+                      borderRadius: BorderRadius.circular(40),
+                      border: Border.all(width: 1),
+                    ),
+                    child: ListTile(
+                      leading: GestureDetector(
+                        onTap: () {
+                          setStatus(index);
+                        },
+                        child: Icon(
+                          Status[index] == '1'
+                              ? Icons.check_box
+                              : Icons.check_box_outline_blank,
+                          size: 40,
+                          color: Colors.blue,
                         ),
-                        title: Text(TaskList[index]),
-                        trailing: GestureDetector(
-                          onTap: (){
-                            DeleteTask(index);
-                          },
-                          child: Icon(Icons.delete)),
-                      ));
+                      ),
+                      title: Text(
+                        TaskList[index],
+                        style: TextStyle(
+                            color: themeProvider.isDarkMode
+                                ? Colors.white
+                                : Colors.black),
+                      ),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          DeleteTask(index);
+                        },
+                        child: Icon(
+                          Icons.delete,
+                          size: 40,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
@@ -167,9 +188,18 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       child: TextField(
                         controller: _newTask,
+                        style: TextStyle(
+                            color: themeProvider.isDarkMode
+                                ? Colors.white
+                                : Colors.black),
                         decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Add Something'),
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black),
+                          hintText: 'Add Something...',
+                        ),
                       ),
                     ),
                   ),
@@ -178,15 +208,16 @@ class _HomePageState extends State<HomePage> {
                       saveTask();
                     },
                     child: Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(40),
-                          ),
-                          color: Colors.blue,
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(40),
                         ),
-                        child: Icon(Icons.add)),
+                        color: Colors.blue,
+                      ),
+                      child: Icon(Icons.add, size: 40),
+                    ),
                   ),
                 ],
               ),
