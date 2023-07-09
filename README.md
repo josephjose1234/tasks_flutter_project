@@ -8,7 +8,8 @@ This project is a starting point for a Flutter application.
 
 ## Features
 
-Has  all the basic level functions, can add and modify Tasks.
+Has all the basic level functions, can add and modify Tasks.
+it can be used for recording Things to do as  and Record its status of Completion.
 
 ## ScreenShorts
 
