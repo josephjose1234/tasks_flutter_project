@@ -10,7 +10,6 @@ This project is a starting point for a Flutter application.
 
 Has  all the basic level functions, can add and modify Tasks.
 
-
 ## ScreenShorts
 
 ![Alt ScreenShot](Screenshot_2023-07-09-08-44-29-550_com.miui.home.jpg)
